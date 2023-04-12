@@ -1,1 +1,90 @@
-# webpackTemplate
+# Webpack Setup Template
+
+- Initialize package.json
+
+<pre>npm init -y</pre>
+
+- Install webpack-cli
+
+<pre>npm install webpack-cli --save-dev</pre>
+
+- Package.json should look like this
+
+<pre>
+{
+   "name": "webpack-demo",
+   "version": "1.0.0",
+   "description": "",
+  "private": true,
+   "scripts": {
+     "test": "echo \"Error: no test specified\" && exit 1"
+   },
+   "keywords": [],
+   "author": "",
+   "license": "MIT",
+   "devDependencies": {
+     "webpack": "^5.38.1",
+     "webpack-cli": "^4.7.2"
+   }
+ }
+</pre>
+
+> Make sure you have a <code>`./src and ./dist`</code> folder
+
+<code>npx webpack</code>
+
+> This will compile your code from ./src/index.js to ./dist/main.js
+
+# create a <code>webpack.config.js</code>file
+
+> this is not required but better than typing a bunch of commands
+
+<pre>
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+};
+</pre>
+
+- Below the command will run the build again with config file
+
+<code>npx webpack --config webpack.config.js</code>
+
+# NPM scripts
+
+- Your <code>package.json</code> file should look like this
+
+<pre>
+ {
+   "name": "webpack-demo",
+   "version": "1.0.0",
+   "description": "",
+   "private": true,
+   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+   },
+   "keywords": [],
+   "author": "",
+   "license": "ISC",
+   "devDependencies": {
+     "webpack": "^5.4.0",
+     "webpack-cli": "^4.2.0"
+   },
+   // The below dependencies are just an example you might have different
+   "dependencies": {
+     "lodash": "^4.17.20"
+   }
+ }
+</pre>
+
+- and then you can run <code>npm run build</code>
+
+# To automatically run the build use the command
+
+<code>npx webpack --watch</code>
