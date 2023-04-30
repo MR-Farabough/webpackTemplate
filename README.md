@@ -33,6 +33,10 @@
 
 <code>npx webpack</code>
 
+# For babel
+
+> npm install -D babel-loader @babel/core @babel/preset-env webpack
+
 > This will compile your code from ./src/index.js to ./dist/main.js
 
 # create a <code>webpack.config.js</code>file
