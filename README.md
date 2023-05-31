@@ -92,3 +92,62 @@ module.exports = {
 # To automatically run the build use the command
 
 <code>npx webpack --watch</code>
+
+# Webpack with jest
+
+`webpack.config.js`
+<pre>
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: ['node_modules'],
+        use: ['babel-loader'],
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.gif$/,
+        type: 'asset/inline',
+      },
+      {
+        test: /\.(ttf|eot|svg)$/,
+        type: 'asset/resource',
+      },
+    ],
+  },
+  resolve: {
+    alias: {
+      config$: './configs/app-config.js',
+      react: './vendor/react-master',
+    },
+    extensions: ['.js', '.jsx'],
+    modules: [
+      'node_modules',
+      'bower_components',
+      'shared',
+      '/shared/vendor/modules',
+    ],
+  },
+};
+</pre>
+
+`jest.config.js`
+<pre>
+odule.exports = {
+  modulePaths: ['/shared/vendor/modules'],
+  moduleFileExtensions: ['js', 'jsx'],
+  moduleDirectories: ['node_modules', 'bower_components', 'shared'],
+
+  moduleNameMapper: {
+    '\\.(css|less)$': '<rootDir>/__mocks__/styleMock.js',
+    '\\.(gif|ttf|eot|svg)$': '<rootDir>/__mocks__/fileMock.js',
+
+    '^react(.*)$': '<rootDir>/vendor/react-master$1',
+    '^config$': '<rootDir>/configs/app-config.js',
+  },
+};
+</pre>
